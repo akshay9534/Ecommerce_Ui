@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faCircleUser } from '@fortawesome/free-solid-svg-icons';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useCart } from "../../context/CartContext";
 import { CategoryContext } from "../../context/CategoryContext";
 
@@ -11,7 +11,18 @@ const Navbar = () => {
   const { categories } = useContext(CategoryContext);
   const { cart } = useCart(); // Access cart from context
   const [isMenuOpen, setIsMenuOpen] = useState(false); // For toggling the mobile menu
+  const menuRef = useRef(null);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const getLinkClass = (path) =>
     location.pathname === path
@@ -41,7 +52,7 @@ const Navbar = () => {
           <h2>{cart.reduce((total, item) => total + item.quantity, 0)}</h2>
         </li>
       </ul>
-      <ul className="lg:hidden relative">
+      <ul className="lg:hidden relative" ref={menuRef}>
         <button onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle Menu">
           <FontAwesomeIcon icon={faCircleUser} className="text-2xl cursor-pointer" />
         </button>

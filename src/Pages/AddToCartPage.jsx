@@ -12,15 +12,13 @@ export const AddToCartPage = ({ isModalOpen, closeModal, selectedProduct }) => {
 
     const handleAddToCart = () => {
       addToCart(selectedProduct, quantity);
-      console.log(`Added ${quantity} of ${selectedProduct.title} to cart.`);
+      //console.log(`Added ${quantity} of ${selectedProduct.title} to cart.`);
       closeModal();
     };
   
     const handleQuantityChange = (change) => {
       setQuantity((prev) => Math.max(1, prev + change));
     };
-
-    
 
   return (
     <>
@@ -41,14 +39,19 @@ export const AddToCartPage = ({ isModalOpen, closeModal, selectedProduct }) => {
                 <div className="flex w-full justify-between mt-3 items-center">
                   <p className="text-gray-500">${selectedProduct.price}</p>
                   <div className="flex items-center gap-4">
-                  <button className="bg-gray-300 px-1 py-0 rounded-xl hover:bg-gray-400 cursor-pointer" onClick={() => handleQuantityChange(-1)}>
-                    <FontAwesomeIcon icon={faMinus} />
-                  </button>
-                  <span className="text-lg font-semibold">{quantity}</span>
-                  <button className="bg-orange-500 text-white  px-1 py-0 rounded-xl cursor-pointer hover:bg-orange-600" onClick={() => handleQuantityChange(1)}>
-                    <FontAwesomeIcon icon={faPlus} />
-                  </button>
+                    <button className="bg-gray-300 px-1 py-0 rounded-xl hover:bg-gray-400 cursor-pointer" onClick={() => handleQuantityChange(-1)}>
+                      <FontAwesomeIcon icon={faMinus} />
+                    </button>
+                    <span className="text-lg font-semibold">{quantity}</span>
+                    <button className="bg-orange-500 text-white  px-1 py-0 rounded-xl cursor-pointer hover:bg-orange-600" onClick={() => handleQuantityChange(1)}>
+                      <FontAwesomeIcon icon={faPlus} />
+                    </button>
                   </div>
+                </div>
+                <div className="mt-3">
+                  <h2>
+                    Total Amount : ${selectedProduct.price * quantity}
+                  </h2>
                 </div>
               </div>
             </div>

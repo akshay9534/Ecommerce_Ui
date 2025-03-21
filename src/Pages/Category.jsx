@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -36,7 +37,7 @@ export const Category = () => {
       setOriginalProducts(filteredProducts);
       setLoading(false);
     } catch (err) {
-      console.error('Error fetching products:', err);
+      //console.error('Error fetching products:', err);
       setError('Error fetching products. Please try again later.');
       setLoading(false);
     }

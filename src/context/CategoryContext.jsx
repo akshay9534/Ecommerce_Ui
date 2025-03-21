@@ -16,7 +16,7 @@ export const CategoryProvider = ({ children }) => {
       const response = await axios.get('https://api.escuelajs.co/api/v1/categories');
       const categoryslice = response.data.slice(0, 4); // Get only first 6 categories
       setCategories(categoryslice);
-      console.log("CategoryContext page    ",response.data)
+      //console.log("CategoryContext page    ",response.data)
     } catch (err) {
       setError(`Error fetching categories: ${err.message}`);
     }
